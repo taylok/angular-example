@@ -1,22 +1,27 @@
 Angular: 9.1.13
-```
-From project root
-ng new angular-example --directory=src/main/ui --style=css --routing=true --dry-run=true
-ng new angular-example --directory=src/main/ui --style=css --routing=true
----
-cd src/main/ui
-ng g class model/user       ;User model class
-ng g service app            ;User service
-ng g component users --flat ;users component in same directory as app
-```
-Modify HTML and Typescript compontent for app and user components
-proxy.config.json creates proxy to http://localhost:8080
-angular.json is made aware of the proxy
-app.component.ts OnInit runs the getUsers service (path /api/users) so is proxied to the SpringBoot host
 
-In development run 
+In production run
+![img.png](img.png)
+
+Fo production phases all the compilation Angular code goes to the folder /src/main/resources/static
+Whatever static assets you put under the static folder you can directly redirect from your Java Controller.
+The correct outputPath is included in the angular.json workspace file. 
+
+src/main/ui/package.json has 
 ```
-(src/main/ui)
-ng serve
-http://localhost:4200 
+    "build-prod": "ng build --prod --deploy-url /ui/",
 ```
+and is called from frontend-maven-plugin.
+
+Use frontend-maven-plugin which executes commands to place all the compiled source code int folder /src/main/ui/dist. 
+The resources tag includes classpath resources associated with the project, so effectively copies src/main/ui/dist/ui to target/static/ui
+The --deploy-url /ui/ means all static resources for this project are available under static/ui folder
+
+This app forwards requests to / to /ui/index.html which includes app-root component.  The typescript class backing file then runs OnInit code to inivoke the service endpoint, the results of which are rendered in the app-root component html template. 
+The app-root html template includes the app-user, whose component class inputs the Users list and binds the user fields in its html template.
+
+Now, when the jar file is run, the Angular app is available from the Spring Boot embedded web server root context on the server port:
+```aidl
+http://localhost:8080
+```
+This is a good starting point to develop the UI more. 

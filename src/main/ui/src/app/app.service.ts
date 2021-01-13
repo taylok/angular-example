@@ -11,6 +11,7 @@ export class AppService {
   rootURL = '/api';
 
   getUsers() {
+    console.log('Get' + this.rootURL + '/users')
     return this.http.get(this.rootURL + '/users');
   }
 

@@ -12,7 +12,8 @@ public class RootController {
 
     @RequestMapping({"/"})
     public String loadUI() {
-        return "forward:/index.html";
+        log.info("loading UI");
+        return "forward:/ui/index.html";
     }
 
 }
