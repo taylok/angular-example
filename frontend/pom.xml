@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>angularexample</artifactId>
+        <groupId>com.kmt</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>frontend</artifactId>
+
+    <name>frontend</name>
+    <description>The frontend module built with Angular</description>
+
+    <properties>
+        <node.version>v14.11.0</node.version>
+        <npm.version>6.14.7</npm.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.7.6</version>
+                <configuration>
+                    <workingDirectory>src/main/angular</workingDirectory>
+                    <nodeVersion>${node.version}</nodeVersion>
+                    <npmVersion>${npm.version}</npmVersion>
+                </configuration>
+                <executions>
+                    <!-- Install npm + ng -->
+                    <execution>
+                        <id>install-node-and-npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                        <phase>initialize</phase>
+                    </execution>
+                    <execution>
+                        <id>npm-install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                    </execution>
+                    <!-- Set main + library versions to match artifact -->
+                    <execution>
+                        <id>npm-version</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>version --allow-same-version ${project.version}</arguments>
+                        </configuration>
+                        <phase>generate-resources</phase>
+                    </execution>
+                    <!-- Build -->
+                    <execution>
+                        <id>npm-build</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run build-prod</arguments>
+                        </configuration>
+                        <phase>generate-resources</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>src/main/angular/dist</directory>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+        </plugins>
+
+        <resources>
+            <resource>
+                <directory>target/frontend</directory>
+                <targetPath>static/ui</targetPath>
+            </resource>
+        </resources>
+
+    </build>
+
+</project>

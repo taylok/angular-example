@@ -1,4 +1,4 @@
-package com.kmt.angularexample.links;
+package angularexample.links;
 
 import org.springframework.stereotype.Component;
 

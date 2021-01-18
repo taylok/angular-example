@@ -1,6 +1,6 @@
-package com.kmt.angularexample.repostiory;
+package angularexample.repostiory;
 
-import com.kmt.angularexample.domain.Users;
+import angularexample.domain.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;

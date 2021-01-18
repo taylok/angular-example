@@ -1,8 +1,8 @@
-package com.kmt.angularexample.controller;
+package angularexample.controller;
 
-import com.kmt.angularexample.domain.Users;
-import com.kmt.angularexample.links.UsersLinks;
-import com.kmt.angularexample.service.UsersService;
+import angularexample.links.UsersLinks;
+import angularexample.domain.Users;
+import angularexample.service.UsersService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

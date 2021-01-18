@@ -1,7 +1,7 @@
-package com.kmt.angularexample.service;
+package angularexample.service;
 
-import com.kmt.angularexample.domain.Users;
-import com.kmt.angularexample.repostiory.UsersRepository;
+import angularexample.repostiory.UsersRepository;
+import angularexample.domain.Users;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

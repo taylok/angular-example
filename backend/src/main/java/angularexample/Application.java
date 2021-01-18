@@ -1,4 +1,4 @@
-package com.kmt.angularexample;
+package angularexample;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

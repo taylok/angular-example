@@ -1,4 +1,4 @@
-package com.kmt.angularexample.domain;
+package angularexample.domain;
 
 import lombok.Data;
 
